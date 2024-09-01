@@ -2,13 +2,13 @@ import React, { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { refreshUser } from "./redux/auth/operations";
+import Layout from "./pages/Layout/Layout";
+import HomePage from "./pages/HomePage/HomePage";
+import RegistrationPage from "./pages/RegistrationPage/RegistrationPage";
+import LoginPage from "./pages/LoginPage/LoginPage";
+import ContactsPage from "./pages/ContactsPage/ContactsPage";
 import PrivateRoute from "./pages/PrivateRoute/PrivateRoute";
 import RestrictedRoute from "./pages/RestrictedRoute/RestrictedRoute";
-import RegisterForm from "./components/RegisterForm/RegisterForm";
-import LoginForm from "./components/LoginForm/LoginForm";
-import Contacts from "./components/Contact/Contact";
-import Home from "./pages/Home/Home";
-import Navbar from "./components/NavBar/NavBar";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -18,36 +18,34 @@ const App = () => {
   }, [dispatch]);
 
   return (
-    <>
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Home />} />
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<HomePage />} />
         <Route
           path="/register"
           element={
-            <RestrictedRoute>
-              <RegisterForm />
-            </RestrictedRoute>
+            <RestrictedRoute
+              component={<RegistrationPage />}
+              redirectTo="/contacts"
+            />
           }
         />
         <Route
           path="/login"
           element={
-            <RestrictedRoute>
-              <LoginForm />
-            </RestrictedRoute>
+            <RestrictedRoute component={<LoginPage />} redirectTo="/contacts" />
           }
         />
         <Route
           path="/contacts"
           element={
             <PrivateRoute>
-              <Contacts />
+              <ContactsPage />
             </PrivateRoute>
           }
         />
-      </Routes>
-    </>
+      </Route>
+    </Routes>
   );
 };
 

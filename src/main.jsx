@@ -1,7 +1,7 @@
 import React from "react";
 
-import store from "./redux/filters/store";
-import { persistor } from "./redux/filters/store";
+import store from "./redux/store";
+import { persistor } from "./redux/store";
 import App from "./App";
 
 import ReactDOM from "react-dom/client";

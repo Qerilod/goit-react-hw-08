@@ -5,9 +5,7 @@ import s from "./SearchBox.module.css";
 const SearchBox = () => {
   const filter = useSelector(selectNameFilter);
   const dispatch = useDispatch();
-  if (!contacts) {
-    return <div>Loading...</div>;
-  }
+
   return (
     <input
       className={s.input}
